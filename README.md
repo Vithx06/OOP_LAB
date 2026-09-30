@@ -1,4 +1,4 @@
-# 📚 Bài tập Lập trình hướng đối tượng — MI4090
+# Bài tập Lập trình hướng đối tượng — MI4090
 
 > Repository lưu trữ các bài thực hành trong quá trình học học phần **Lập trình hướng đối tượng (MI4090)**.
 
@@ -28,3 +28,17 @@
 
 > *Danh sách và nội dung các bài tập sẽ được cập nhật trong quá trình học.*
 
+---
+
+## 📂 Cấu trúc mỗi bài thực hành
+
+Mỗi thư mục `LAB_xx` được tổ chức thành **3 thành phần chính**:
+
+```text
+LAB_xx/
+│
+├── 📄 Đề bài
+│
+├── 📐 UML
+│
+└── 💻 Mã nguồn
