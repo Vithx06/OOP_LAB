@@ -1,0 +1,16 @@
+D:\Codeeee\OOP\Ex01\bin\Debug\net11.0\Ex01.exe
+D:\Codeeee\OOP\Ex01\bin\Debug\net11.0\Ex01.deps.json
+D:\Codeeee\OOP\Ex01\bin\Debug\net11.0\Ex01.runtimeconfig.json
+D:\Codeeee\OOP\Ex01\bin\Debug\net11.0\Ex01.runtimeconfig.dev.json
+D:\Codeeee\OOP\Ex01\bin\Debug\net11.0\Ex01.dll
+D:\Codeeee\OOP\Ex01\bin\Debug\net11.0\Ex01.pdb
+D:\Codeeee\OOP\Ex01\obj\Debug\net11.0\Ex01.GeneratedMSBuildEditorConfig.editorconfig
+D:\Codeeee\OOP\Ex01\obj\Debug\net11.0\Ex01.AssemblyInfoInputs.cache
+D:\Codeeee\OOP\Ex01\obj\Debug\net11.0\Ex01.AssemblyInfo.cs
+D:\Codeeee\OOP\Ex01\obj\Debug\net11.0\Ex01.csproj.CoreCompileInputs.cache
+D:\Codeeee\OOP\Ex01\obj\Debug\net11.0\Ex01.dll
+D:\Codeeee\OOP\Ex01\obj\Debug\net11.0\refint\Ex01.dll
+D:\Codeeee\OOP\Ex01\obj\Debug\net11.0\Ex01.pdb
+D:\Codeeee\OOP\Ex01\obj\Debug\net11.0\Ex01.genruntimeconfig.cache
+D:\Codeeee\OOP\Ex01\obj\Debug\net11.0\ref\Ex01.dll
+D:\Codeeee\OOP\Ex01\obj\Debug\net11.0\Ex01.csproj.Up2Date

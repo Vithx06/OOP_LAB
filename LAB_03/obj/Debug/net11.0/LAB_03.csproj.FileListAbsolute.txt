@@ -1,0 +1,16 @@
+D:\Codeeee\OOP\LAB_03\bin\Debug\net11.0\LAB_03.exe
+D:\Codeeee\OOP\LAB_03\bin\Debug\net11.0\LAB_03.deps.json
+D:\Codeeee\OOP\LAB_03\bin\Debug\net11.0\LAB_03.runtimeconfig.json
+D:\Codeeee\OOP\LAB_03\bin\Debug\net11.0\LAB_03.runtimeconfig.dev.json
+D:\Codeeee\OOP\LAB_03\bin\Debug\net11.0\LAB_03.dll
+D:\Codeeee\OOP\LAB_03\bin\Debug\net11.0\LAB_03.pdb
+D:\Codeeee\OOP\LAB_03\obj\Debug\net11.0\LAB_03.GeneratedMSBuildEditorConfig.editorconfig
+D:\Codeeee\OOP\LAB_03\obj\Debug\net11.0\LAB_03.AssemblyInfoInputs.cache
+D:\Codeeee\OOP\LAB_03\obj\Debug\net11.0\LAB_03.AssemblyInfo.cs
+D:\Codeeee\OOP\LAB_03\obj\Debug\net11.0\LAB_03.csproj.CoreCompileInputs.cache
+D:\Codeeee\OOP\LAB_03\obj\Debug\net11.0\LAB_03.dll
+D:\Codeeee\OOP\LAB_03\obj\Debug\net11.0\refint\LAB_03.dll
+D:\Codeeee\OOP\LAB_03\obj\Debug\net11.0\LAB_03.pdb
+D:\Codeeee\OOP\LAB_03\obj\Debug\net11.0\LAB_03.genruntimeconfig.cache
+D:\Codeeee\OOP\LAB_03\obj\Debug\net11.0\ref\LAB_03.dll
+D:\Codeeee\OOP\LAB_03\obj\Debug\net11.0\LAB_03.csproj.Up2Date
