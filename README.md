@@ -17,7 +17,7 @@
 
 ## 📑 Danh sách bài tập
 
-| STT | Bài thực hành | Source |
+| STT | Bài thực hành | Vị trí |
 |:---:|---|:---:|
 | 01 | **LAB 03** | [Xem bài](./LAB_03) |
 | 02 | **LAB 04** | [Xem bài](./LAB_04) |
