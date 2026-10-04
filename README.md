@@ -10,7 +10,7 @@
 |---|---|
 | **Ngôn ngữ** | C# |
 | **Framework** | .NET |
-| **IDE** | Visual Studio / Visual Studio Code |
+| **IDE** | Visual Studio Code |
 | **Quản lý mã nguồn** | Git & GitHub |
 
 ---
