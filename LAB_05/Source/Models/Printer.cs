@@ -1,11 +1,9 @@
-
 using System;
 
 public class Printer : Device
 {
     private PrinterTechnology _printerTechnology;
     private int _pagesPrinted;
-    private bool _supportsNetwork;
     private bool _isColorPrinter;
 
     public PrinterTechnology PrinterTechnology
@@ -36,12 +34,6 @@ public class Printer : Device
         }
     }
 
-    public bool SupportsNetwork
-    {
-        get => _supportsNetwork;
-        set => _supportsNetwork = value;
-    }
-
     public bool IsColorPrinter
     {
         get => _isColorPrinter;
@@ -56,13 +48,11 @@ public class Printer : Device
         DeviceStatus status,
         PrinterTechnology printerTechnology,
         int pagesPrinted,
-        bool supportsNetwork,
         bool isColorPrinter)
         : base(deviceId, deviceName, yearOfUse, purchasePrice, status)
     {
         PrinterTechnology = printerTechnology;
         PagesPrinted = pagesPrinted;
-        SupportsNetwork = supportsNetwork;
         IsColorPrinter = isColorPrinter;
     }
 
@@ -88,7 +78,6 @@ public class Printer : Device
         return base.ToString() +
                $", Technology: {PrinterTechnology}" +
                $", Pages printed: {PagesPrinted}" +
-               $", Supports network: {SupportsNetwork}" +
                $", Color printer: {IsColorPrinter}";
     }
 }
