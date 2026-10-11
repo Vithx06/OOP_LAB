@@ -32,11 +32,6 @@ public class LabRoom
         get => _capacity;
     }
 
-    public List<Device> Devices
-    {
-        get => new List<Device>(_devices);
-    }
-
     public LabRoom(string roomId, string roomName, int capacity)
     {
         if (string.IsNullOrWhiteSpace(roomId))
