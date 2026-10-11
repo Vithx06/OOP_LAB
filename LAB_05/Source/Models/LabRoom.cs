@@ -83,19 +83,18 @@ public class LabRoom
     {
         if (string.IsNullOrWhiteSpace(deviceId))
         {
-            throw new ArgumentException("Device ID cannot be null or empty.", nameof(deviceId));
+            throw new ArgumentException("Device ID cannot be null or empty.",nameof(deviceId));
         }
 
-        for (int i = 0; i < _devices.Count; i++)
+        Device? device = FindDevice(deviceId);
+
+        if (device == null)
         {
-            if (_devices[i].DeviceId == deviceId)
-            {
-                _devices.RemoveAt(i);
-                return true;
-            }
+            throw new KeyNotFoundException($"Device with ID '{deviceId}' was not found in this room.");
         }
 
-        return false;
+        _devices.Remove(device);
+        return true;
     }
 
     public Device? FindDevice(string deviceId)
@@ -114,6 +113,11 @@ public class LabRoom
         }
 
         return null;
+    }
+
+    public IReadOnlyList<Device> GetDevices()
+    {
+        return _devices.AsReadOnly();
     }
 
     public decimal CalculateAnnualMaintenanceCost()

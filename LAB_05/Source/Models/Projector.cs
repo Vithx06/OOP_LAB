@@ -12,8 +12,7 @@ public class Projector : Device
         {
             if (value <= 0)
             {
-                throw new ArgumentOutOfRangeException(nameof(value),"Brightness must be greater than zero."
-                );
+                throw new ArgumentOutOfRangeException(nameof(value),"Brightness must be greater than zero.");
             }
 
             _brightness = value;
@@ -27,8 +26,7 @@ public class Projector : Device
         {
             if (value < 0)
             {
-                throw new ArgumentOutOfRangeException(nameof(value),"Lamp hours used cannot be negative."
-                );
+                throw new ArgumentOutOfRangeException(nameof(value),"Lamp hours used cannot be negative.");
             }
 
             _lampHoursUsed = value;
