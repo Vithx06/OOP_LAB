@@ -1,3 +1,7 @@
+/****************/
+// 202419017
+// Đinh Thế Vinh
+/****************/
 public interface INetworkable
 {
     string? IpAddress { get; }

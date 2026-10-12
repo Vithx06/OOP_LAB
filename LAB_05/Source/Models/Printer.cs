@@ -1,3 +1,7 @@
+/****************/
+// 202419017
+// Đinh Thế Vinh
+/****************/
 using System;
 
 public class Printer : Device
