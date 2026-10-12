@@ -1,3 +1,7 @@
+/****************/
+// 202419017
+// Đinh Thế Vinh
+/****************/
 public class Payroll
 {
     private string _period;
