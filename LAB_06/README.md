@@ -22,7 +22,7 @@ Xây dựng hệ thống quản lý mượn và trả thiết bị phục vụ g
 ```text
 LAB_06/
 ├── Problem/                          # Đề bài
-│   └── LAB_06.pdf                    
+│   └── Problem.pdf                    
 ├── UML/                           
 │   ├── Bussiness_UML.png             # Sơ đồ UML các lớp nghiệp vụ
 │   └── Exceptio_UML.png              # Sơ đồ UML các lớp ngoại lệ
