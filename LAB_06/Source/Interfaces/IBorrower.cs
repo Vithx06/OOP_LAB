@@ -2,11 +2,12 @@
 // 202419017
 // Đinh Thế Vinh
 /****************/
+namespace Source.Interfaces;
 
 public interface IBorrower
 {
-    public string BorrowID {get; }
-    public string FullName {get; }
+    string BorrowerId { get; }
+    string FullName { get; }
 
-    int GetMaximunDevices();
+    int GetMaximumDevices();
 }
