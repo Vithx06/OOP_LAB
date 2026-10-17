@@ -4,6 +4,7 @@
 /****************/
 using System;
 using Source.Enum;
+using Source.Exceptions;
 
 namespace Source.Models.Devices;
 
@@ -42,17 +43,23 @@ public abstract class Device
         }
     }
 
+
     public DeviceStatus Status
     {
         get => _status;
-        private set
+        set
         {
             if (!System.Enum.IsDefined(typeof(DeviceStatus), value))
             {
-                throw new ArgumentOutOfRangeException(nameof(value),"Invalid device status.");
+                throw new ArgumentOutOfRangeException(
+                    nameof(value),
+                    "Invalid device status.");
             }
+
+            _status = value;
         }
     }
+
 
     public int MaxBorrowDays
     {
@@ -103,14 +110,5 @@ public abstract class Device
         Status = DeviceStatus.Available;
     }
 
-    // Phí trễ hạn theo số ngày trễ, 10.000 VND/ngày
-    public decimal CalculateLateFee(int lateDays)
-    {
-        if (lateDays < 0)
-        {
-            throw new ArgumentOutOfRangeException(nameof(lateDays), "Late days cannot be negative.");
-        }
-
-        return lateDays * 10000m;
-    }
+    public abstract decimal CalculateLateFee(int lateDays);
 }
