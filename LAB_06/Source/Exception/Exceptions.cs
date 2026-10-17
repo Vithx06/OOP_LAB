@@ -3,6 +3,9 @@
 // Đinh Thế Vinh
 /****************/
 using System;
+using Source.Enum;
+
+namespace Source.Exceptions;
 // Lớp ngoại lệ cơ sở 
 public class BorrowingException : Exception
 {
