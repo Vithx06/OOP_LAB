@@ -3,6 +3,9 @@
 // Đinh Thế Vinh
 /****************/
 using System;
+using Source.Enum;
+
+namespace Source.Models.Devices;
 
 public abstract class Device
 {
@@ -44,12 +47,10 @@ public abstract class Device
         get => _status;
         private set
         {
-            if (!Enum.IsDefined(typeof(DeviceStatus), value))
+            if (!System.Enum.IsDefined(typeof(DeviceStatus), value))
             {
-                throw new ArgumentOutOfRangeException(nameof(value), "Invalid device status.");
+                throw new ArgumentOutOfRangeException(nameof(value),"Invalid device status.");
             }
-
-            _status = value;
         }
     }
 
@@ -67,11 +68,11 @@ public abstract class Device
         }
     }
 
-    protected Device(string deviceId, string name, DeviceStatus status, int maxBorrowDays)
+    protected Device(string deviceId, string name, int maxBorrowDays)
     {
         DeviceId = deviceId;
         Name = name;
-        Status = status;
+        Status = DeviceStatus.Available;
         MaxBorrowDays = maxBorrowDays;
     }
 
@@ -102,7 +103,7 @@ public abstract class Device
         Status = DeviceStatus.Available;
     }
 
-    // Cần xác định công thức tính phí trễ ???
+    // Phí trễ hạn theo số ngày trễ, 10.000 VND/ngày
     public decimal CalculateLateFee(int lateDays)
     {
         if (lateDays < 0)
@@ -110,6 +111,6 @@ public abstract class Device
             throw new ArgumentOutOfRangeException(nameof(lateDays), "Late days cannot be negative.");
         }
 
-        return 0m;
+        return lateDays * 10000m;
     }
 }
