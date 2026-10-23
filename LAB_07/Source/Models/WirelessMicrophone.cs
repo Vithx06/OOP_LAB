@@ -19,7 +19,7 @@ public class WirelessMicrophone : TeachingDevice
         {
             if (value < 0 || value > 100)
             {
-                throw new ArgumentOutOfRangeException(nameof(value),"Battery level must be between 0 and 100.");
+                throw new ArgumentOutOfRangeException(nameof(value), "Battery level must be between 0 and 100.");
             }
 
             _batteryLevel = value;
@@ -33,18 +33,24 @@ public class WirelessMicrophone : TeachingDevice
         {
             if (value < 0 || value > 100)
             {
-                throw new ArgumentOutOfRangeException(nameof(value),"Signal quality must be between 0 and 100.");
+                throw new ArgumentOutOfRangeException(nameof(value), "Signal quality must be between 0 and 100.");
             }
 
             _signalQuality = value;
         }
     }
 
-    public WirelessMicrophone(string id,string name,string storageLocation,int batteryLevel,int signalQuality)
+    public WirelessMicrophone(string id, string name, string storageLocation, int batteryLevel, int signalQuality)
     : base(id, name, storageLocation)
     {
         BatteryLevel = batteryLevel;
         SignalQuality = signalQuality;
+    }
+
+    // Micro tương thích với tất cả các phòng
+    public override bool IsCompatibleWith(string roomId)
+    {
+        return !string.IsNullOrWhiteSpace(roomId);
     }
 
     // Điều kiện sẵn sàng của Micro: Sẵn có, Pin >=30%, Chất lượng tín hiệu >=40%
