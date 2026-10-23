@@ -30,6 +30,12 @@ public class ProjectorRemote : TeachingDevice
         BatteryLevel = batteryLevel;
     }
 
+    // Điều khiển máy chiếu tương thích với tất cả các phòng
+    public override bool IsCompatibleWith(string roomId)
+    {
+        return !string.IsNullOrWhiteSpace(roomId);
+    }
+
     // Điều kiện sẵn sàng của Đk máy chiếu: Sẵn có, Pin >=20%
     public override bool IsReadyForUse()
     {
@@ -37,7 +43,7 @@ public class ProjectorRemote : TeachingDevice
     }
 
     // Điểm ưu tiên mặc định = Pin
-    public override double GetDefaultPriorityScore()
+    public override double GetDefaultPriorityScore(string roomId)
     {
         return BatteryLevel;
     }

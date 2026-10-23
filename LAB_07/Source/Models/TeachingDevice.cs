@@ -79,16 +79,23 @@ public abstract class TeachingDevice : IIdentifiable
         StorageLocation = storageLocation;
         Status = DeviceStatus.Available;
     }
-
+    // Phải có thêm tham số roomId vào để đảm bảo tính đa hình
+    public abstract bool IsCompatibleWith(string roomId);
     public abstract bool IsReadyForUse();
 
-    public abstract double GetDefaultPriorityScore();
+    public abstract double GetDefaultPriorityScore(string roomId);
 
-    public void Borrow()
+    // Borrow kiểm tra các thiết bị được mượn cho phòng tương ứng là hợp lệ
+    public void Borrow(string roomId)
     {
         if (!IsReadyForUse())
         {
             throw new DeviceNotReadyException(Id, Status);
+        }
+
+        if (!IsCompatibleWith(roomId))
+        {
+            throw new InvalidOperationException("Device is not compatible with the specified room.");
         }
 
         Status = DeviceStatus.Borrowed;

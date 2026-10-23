@@ -55,7 +55,7 @@ public class WirelessMicrophone : TeachingDevice
 
     // Điểm ưu tiên mặc định = (Pin + Chất lượng tín hiệu)/2
     // Để chia 2.0 do cần kq thực
-    public override double GetDefaultPriorityScore()
+    public override double GetDefaultPriorityScore(string roomId)
     {
         return (BatteryLevel + SignalQuality) / 2.0;
     }
