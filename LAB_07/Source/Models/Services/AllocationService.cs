@@ -7,7 +7,7 @@ using System.Collections.Generic;
 using Source.Interfaces;
 using Source.Models.Devices;
 
-namespace Source.Services;
+namespace Source.Models.Services;
 
 public class AllocationService<T>
     where T : TeachingDevice
