@@ -3,11 +3,11 @@
 // Đinh Thế Vinh
 /****************/
 
+using System;
+using Source.Delegates;
 using Source.EventArgs;
 
 namespace Source.Services;
-
-public delegate bool AlertFilter(DeviceAlertEventArgs alert);
 
 public class FilteredAlertSubscriber
 {

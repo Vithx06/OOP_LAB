@@ -5,7 +5,7 @@
 
 using System;
 using System.Collections.Generic;
-using Source.Models.Devices;
+using Source.Models;
 
 namespace Source.Services;
 
