@@ -39,18 +39,17 @@ LAB_08/
 │   │   └── AlertFilter.cs
 │   ├── Exceptions/                    # Các lớp ngoại lệ tùy chỉnh
 │   │   └── InvalidDeviceReadingException.cs
-│   ├── Models/                        # Các lớp mô hình và nghiệp vụ
-│   │   ├── Devices/                   # Các lớp thiết bị
-│   │   │   ├── TeachingDevice.cs
-│   │   │   ├── ProjectorRemote.cs
-│   │   │   ├── AirConditionerRemote.cs
-│   │   │   └── WirelessMicrophone.cs
-│   │   └── FilteredAlertSubscriber.cs
+│   ├── Models/                        # Các lớp mô hình thiết bị
+│   │   ├── TeachingDevice.cs
+│   │   ├── ProjectorRemote.cs
+│   │   ├── AirConditionerRemote.cs
+│   │   └── WirelessMicrophone.cs
 │   ├── Services/                      # Các dịch vụ xử lý sự kiện
 │   │   ├── ConsoleNotificationService.cs
 │   │   ├── DeviceAuditLogger.cs
 │   │   ├── MaintenanceService.cs
-│   │   └── DeviceMonitoringCoordinator.cs
+│   │   ├── DeviceMonitoringCoordinator.cs
+│   │   └── FilteredAlertSubscriber.cs
 │   ├── Program.cs                     # Chương trình chính
 │   └── Source.csproj                  # Tệp cấu hình dự án .NET
 └── README.md                          # Tài liệu giới thiệu dự án
