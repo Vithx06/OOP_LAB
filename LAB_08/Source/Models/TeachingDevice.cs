@@ -6,7 +6,7 @@
 using Source.Enum;
 using Source.EventArgs;
 
-namespace Source.Models.Devices;
+namespace Source.Models;
 
 public abstract class TeachingDevice
 {

@@ -6,7 +6,7 @@
 using Source.Enum;
 using Source.Exceptions;
 
-namespace Source.Models.Devices;
+namespace Source.Models;
 
 public class ProjectorRemote : TeachingDevice
 {

@@ -5,7 +5,7 @@
 
 using Source.Enum;
 
-namespace Source.Models.Devices;
+namespace Source.Models;
 
 public class AirConditionerRemote : TeachingDevice
 {
