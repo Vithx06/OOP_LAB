@@ -226,5 +226,36 @@ class Program
             coordinator.Dispose();
             Console.WriteLine("Dispose thực hiện thành công.");
         });
+
+        // 14. Kiểm tra một event có nhiều subscriber
+        TestEdge("14. Kiểm tra một event có nhiều subscriber", () =>
+        {
+            ProjectorRemote testProjector = new ProjectorRemote("TEST_PR01", "Máy chiếu kiểm thử", 100);
+
+            int subscriberCount = 0;
+
+            testProjector.AlertRaised += (sender, e) =>
+            {
+                subscriberCount++;
+                Console.WriteLine($"Subscriber 1 nhận cảnh báo: {e.Message}");
+            };
+
+            testProjector.AlertRaised += (sender, e) =>
+            {
+                subscriberCount++;
+                Console.WriteLine($"Subscriber 2 nhận cảnh báo: {e.Message}");
+            };
+
+            testProjector.UpdateBatteryLevel(15);
+
+            Console.WriteLine($"Số subscriber đã nhận event: {subscriberCount}");
+
+            if (subscriberCount != 2)
+            {
+                throw new Exception("Không phải tất cả subscriber đều nhận được event.");
+            }
+
+            Console.WriteLine("Cả hai subscriber đều nhận được cùng một event.");
+        });
     }
 }
