@@ -27,6 +27,8 @@
 | 06 | **LAB 08** | [Xem bài](./LAB_08) |
 | 07 | **LAB 10** | [Xem bài](./LAB_10) |
 
+> *Số hiệu Lab tương ứng với tuần được giao bài (ví dụ: LAB 10 là bài được giao ở tuần 10).*
+>
 > *Danh sách và nội dung các bài tập sẽ được cập nhật trong quá trình học.*
 
 ---
