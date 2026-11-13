@@ -25,6 +25,7 @@
 | 04 | **LAB 06** | [Xem bài](./LAB_06) |
 | 05 | **LAB 07** | [Xem bài](./LAB_07) |
 | 06 | **LAB 08** | [Xem bài](./LAB_08) |
+| 07 | **LAB 10** | [Xem bài](./LAB_10) |
 
 > *Danh sách và nội dung các bài tập sẽ được cập nhật trong quá trình học.*
 
