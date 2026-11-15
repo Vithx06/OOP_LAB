@@ -53,7 +53,8 @@ LAB_10/
 - Áp dụng Factory để tập trung việc lựa chọn lớp cụ thể và khởi tạo thiết bị, giúp client làm việc qua `IDevice`.
 - Áp dụng Singleton với `Lazy<HomeConfiguration>` để khởi tạo cấu hình khi cần và bảo đảm an toàn luồng trong quá trình khởi tạo.
 - Áp dụng Facade để tập trung các thao tác của chế độ đi làm và đi ngủ, giảm số lời gọi mà client phải thực hiện.
-- Xây dựng bộ kiểm thử `PatternTests.RunAll()` cho năm tình huống T1–T5 trong đề; kết quả chạy kiểm tra đạt 5/5 tình huống.
+- Hoàn thiện `Program.cs` để minh họa tạo thiết bị, sử dụng cấu hình chung, điều khiển riêng từng thiết bị và kích hoạt hai chế độ qua Facade.
+- Xây dựng bộ kiểm thử `PatternTests.RunAll()` cho năm tình huống T1–T5 trong đề và năm nhóm kiểm thử biên T6–T10; kết quả chạy kiểm tra đạt 10/10 tình huống.
 
 Các tình huống kiểm thử gồm:
 
@@ -63,7 +64,19 @@ Các tình huống kiểm thử gồm:
 - **T4:** `GoToWork()` in đúng thứ tự đèn tắt, quạt tắt và cửa khóa.
 - **T5:** `GoToSleep()` in đúng thứ tự quạt tắt, cửa khóa, đèn bật và mức sáng cấu hình 45%; khôi phục cấu hình sau kiểm thử.
 
-Hiện tại, `Program.cs` vẫn là khung ban đầu và chưa gọi bộ kiểm thử. Kết quả trên được kiểm tra bằng chương trình chạy tạm gọi `PatternTests.RunAll()`.
+- **T6:** Factory xử lý đúng loại thiết bị viết hoa và có khoảng trắng, tab hoặc xuống dòng ở đầu, cuối chuỗi.
+- **T7:** Factory từ chối loại thiết bị null, rỗng hoặc chỉ có khoảng trắng bằng `ArgumentException` cho tham số `type`.
+- **T8:** Cả ba loại thiết bị từ chối tên null, rỗng hoặc chỉ có khoảng trắng bằng `ArgumentException` cho tham số `name`.
+- **T9:** Facade từ chối từng phụ thuộc đèn, quạt hoặc cửa null bằng `ArgumentNullException` cho đúng tham số.
+- **T10:** Cùng một Facade đọc mức sáng mới nhất sau các lần cập nhật cấu hình qua các mức 0%, 100% và 65%; hai biến cấu hình cùng quan sát thay đổi và cấu hình được khôi phục sau kiểm thử.
+
+Chạy từ thư mục gốc của repository, với .NET SDK hỗ trợ `net11.0`:
+
+```powershell
+dotnet run --project LAB_10/Source/Source.csproj
+```
+
+Chương trình chạy phần minh họa rồi tự động gọi `PatternTests.RunAll()`, hiển thị kết quả từng tình huống và tổng kết. Mã thoát là `0` khi toàn bộ kiểm thử đạt, `1` nếu có kiểm thử thất bại hoặc phát sinh lỗi trong chương trình chính.
 
 ## 5. Vị trí sử dụng các mẫu thiết kế và hạn chế
 
