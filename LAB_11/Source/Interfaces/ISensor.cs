@@ -7,4 +7,6 @@ namespace Source.Interfaces;
 
 public interface ISensor
 {
+    double ReadValue();
+    string GetUnit();
 }
