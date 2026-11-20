@@ -7,4 +7,5 @@ namespace Source.Interfaces;
 
 public interface IEmergencyMediator
 {
+    void Notify(string eventName);
 }
