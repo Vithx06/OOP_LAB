@@ -63,3 +63,17 @@ LAB_08/
 - Sử dụng delegate và callback để xây dựng chính sách lọc thông báo linh hoạt theo mức độ cảnh báo.
 - Tổ chức việc đăng ký và hủy đăng ký các bộ xử lý sự kiện tập trung, hạn chế đăng ký trùng lặp và hỗ trợ quản lý vòng đời của các đăng ký.
 - Kiểm tra tính hợp lệ của mức pin và chất lượng tín hiệu, xử lý các giá trị không hợp lệ bằng ngoại lệ tùy chỉnh.
+
+## 5. Trả lời câu hỏi thiết kế
+
+### 5.1. Vì sao thiết bị không nên gọi trực tiếp MaintenanceService?
+
+Thiết bị chỉ cần phát hiện tình trạng của chính nó và công bố điều đã xảy ra, không nên quyết định cụ thể bên nào gửi thông báo hay lập yêu cầu bảo trì. Gọi trực tiếp dịch vụ sẽ làm lớp thiết bị phụ thuộc vào dịch vụ đó và phải sửa khi thay đổi cách xử lý. Với event, dịch vụ bảo trì tự đăng ký và lọc `Critical`; có thể thêm email hoặc dashboard bằng subscriber mới mà không sửa publisher. Đổi lại, việc ghép và quản lý vòng đời đăng ký phải được thực hiện rõ ràng ở bên ngoài.
+
+### 5.2. Khi nào cần một event riêng, khi nào có thể dùng chung một event?
+
+Nên tách khi ý nghĩa nghiệp vụ và dữ liệu khác nhau: `StatusChanged` mô tả trạng thái cũ, mới và thời điểm đổi, còn `AlertRaised` mô tả thông báo, mức độ và thời điểm cảnh báo. Pin thấp, tín hiệu yếu và điều khiển không phản hồi có thể dùng chung `AlertRaised` vì đều phù hợp với hợp đồng cảnh báo và cách xử lý theo mức độ. Nếu một chức năng mới cần dữ liệu có cấu trúc riêng mà hợp đồng hiện tại không đáp ứng, nên bổ sung event hoặc kiểu dữ liệu phù hợp thay vì buộc subscriber phân tích chuỗi `Message`.
+
+### 5.3. Thành phần nào có quyền phát sinh event?
+
+Chỉ lớp khai báo event là `TeachingDevice` được trực tiếp gọi `Invoke()` trên event đó. Các lớp dẫn xuất phát cảnh báo thông qua `RaiseAlert()` và các phương thức `On...` có mức truy cập `protected`; chúng không trực tiếp gọi event được khai báo ở lớp cơ sở. Mã bên ngoài chỉ được đăng ký hoặc hủy handler bằng `+=`, `-=`, không được tự gọi hay gán lại event. `OnStatusChanged()` và `OnAlertRaised()` là `protected virtual` để lớp dẫn xuất mở rộng cách công bố khi cần và gọi lại bản cơ sở để giữ việc thông báo.

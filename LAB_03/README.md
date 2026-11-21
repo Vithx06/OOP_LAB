@@ -50,3 +50,13 @@ LAB_03/
 - Thể hiện quan hệ kết tập giữa `ProjectTeam` và `Employee`: các nhóm giữ tham chiếu đến nhân sự, một nhân sự có thể tham gia nhiều nhóm và tiếp tục tồn tại khi một nhóm được thu gom.
 - Xây dựng các tình huống kiểm thử trong `Program.cs` cho thao tác quản lý nhóm, tính chi phí, lời gọi đa hình và dữ liệu không hợp lệ.
 - Minh họa finalizer trong C# và sử dụng cơ chế thu gom rác để quan sát vòng đời nhóm dự án mà không chủ động hủy các nhân sự được tham chiếu.
+
+## 5. Giải thích thiết kế
+
+### 5.1. Nạp chồng và đa hình được sử dụng ở đâu?
+
+Các constructor, `IncreaseSalary()` và `AddMember()` được nạp chồng để hỗ trợ nhiều cách cung cấp dữ liệu; phiên bản được chọn dựa trên danh sách đối số khi biên dịch. `CalculateMonthlyCost()` và `DisplayInfo()` được ghi đè để thay đổi hành vi theo loại nhân sự khi chạy. Nhờ đó, `ProjectTeam` chỉ cần duyệt danh sách `Employee` mà vẫn tính đúng chi phí và hiển thị đủ thông tin của `SoftwareEngineer`.
+
+### 5.2. Vì sao nhân sự vẫn tồn tại khi nhóm không còn được sử dụng?
+
+Bỏ tham chiếu đến nhóm không có nghĩa là chủ động hủy các nhân sự trong danh sách của nhóm. Trong C#, kết thúc phạm vi không bảo đảm đối tượng được thu gom hoặc finalizer chạy ngay; GC quyết định thời điểm xử lý. Chương trình dùng `GC.Collect()` và `GC.WaitForPendingFinalizers()` để minh họa, còn nhân sự vẫn được sử dụng vì các biến hoặc nhóm khác còn giữ tham chiếu đến họ.

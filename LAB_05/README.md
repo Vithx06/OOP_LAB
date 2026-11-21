@@ -58,3 +58,13 @@ LAB_05/
 - Tổng hợp chi phí qua danh sách `Device` bằng lời gọi đa hình, không phân nhánh theo từng lớp thiết bị trong `LabRoom`.
 - Tổ chức mã nguồn theo nhóm chức năng, tách biệt các kiểu liệt kê, giao diện và lớp mô hình.
 - Xây dựng các tình huống kiểm thử trong `Program.cs` cho quản lý thiết bị theo phòng, tính chi phí bảo trì, thao tác mạng qua `INetworkable`, trùng mã, giới hạn sức chứa và dữ liệu không hợp lệ.
+
+## 5. Trả lời câu hỏi thiết kế
+
+### 5.1. Chọn mô hình nào cho trường hợp chỉ một số máy in có khả năng mạng? Trade-off là gì?
+
+Chọn `NetworkPrinter` kế thừa `Printer` và thực thi `INetworkable`, còn `Printer` thông thường không có khả năng mạng. Cách này tái sử dụng thông tin, công thức bảo trì của máy in và thể hiện khả năng mạng ngay qua kiểu đối tượng, thay vì cho mọi máy in các phương thức kết nối không dùng được. Đổi lại, cần thêm lớp dẫn xuất và logic kết nối hiện bị lặp giữa `Computer` và `NetworkPrinter`. Nếu có nhiều loại thiết bị mạng hoặc cần thay đổi khả năng kết nối linh hoạt, có thể tách một thành phần kết nối để kết tập vào thiết bị, nhưng cách đó cần thêm đối tượng và cơ chế phối hợp.
+
+### 5.2. Vì sao cần bổ sung IsColorPrinter?
+
+Đề yêu cầu cộng 300.000 đồng khi máy in màu, nhưng `PrinterTechnology` chỉ phân biệt laser và phun, không đủ để xác định khả năng in màu. Vì vậy `Printer` bổ sung `IsColorPrinter` để tính khoản chi phí này độc lập với công nghệ in. Máy in laser hoặc phun đều có thể là máy in màu, nên không nên suy ra thông tin màu từ enum công nghệ.
