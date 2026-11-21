@@ -55,8 +55,11 @@ public static class PatternTests
         if (TestEdge("T11. Các thành phần từ chối dữ liệu và phụ thuộc không hợp lệ", TestInvalidInputs))
             passed++;
 
-        Console.WriteLine($"\nKết quả kiểm thử: {passed}/11 tình huống đạt.");
-        return passed == 11;
+        if (TestEdge("T12. Monitor làm việc với cảm biến khác qua ISensor", TestSensorAbstraction))
+            passed++;
+
+        Console.WriteLine($"\nKết quả kiểm thử: {passed}/12 tình huống đạt.");
+        return passed == 12;
     }
 
     // Mỗi tình huống được chạy độc lập và chỉ đạt khi các điều kiện đều đúng
@@ -204,15 +207,18 @@ public static class PatternTests
         ISensor sensor = new SmokeSensorAdapter(new LegacySmokeDetector(735));
         AlertEvent? before = null;
         AlertEvent? after = null;
+        RecordingMediator mediator = new RecordingMediator();
         monitor.Attach(new CallbackObserver(alert => before = alert));
         monitor.Attach(new CallbackObserver(_ => throw new InvalidOperationException("Observer kiểm thử bị lỗi.")));
         monitor.Attach(new CallbackObserver(alert => after = alert));
+        monitor.Attach(new EmergencyBridgeObserver(mediator));
 
         string output = CaptureOutput(() => monitor.CheckSensor("Phòng máy A", sensor));
 
         Check(before is not null && ReferenceEquals(before, after), "Các observer không cùng nhận dữ liệu cảnh báo.");
         Check(after!.Value == 73.5 && after.Severity == "CRITICAL", "Dữ liệu cảnh báo bị sai sau khi observer lỗi.");
         Check(output.Contains("[OBSERVER ERROR]") && output.Contains("Observer kiểm thử bị lỗi."), "Monitor chưa ghi lỗi observer.");
+        Check(mediator.Events.Count == 1 && mediator.Events[0] == "FIRE_DETECTED", "Observer lỗi đã ngăn luồng ứng phó khẩn cấp.");
     }
 
     private static void TestAlertObservers()
@@ -275,15 +281,14 @@ public static class PatternTests
 
         legacy.SetSmokeLevel(500);
         string warningOutput = CaptureOutput(() => monitor.CheckSensor("Phòng máy A", sensor));
-        Check(warningOutput.Contains("[WARNING]") && !warningOutput.Contains("[ALARM]"), "Luồng WARNING xử lý sai.");
-        Check(!warningOutput.Contains("[DOOR]") && !warningOutput.Contains("[VENTILATION]"), "WARNING đã kích hoạt cửa hoặc thông gió.");
         Check(audit.Logs.Count == 1, "WARNING chưa được ghi nhật ký.");
+        Check(warningOutput == GetAlertOutput(50, "WARNING", audit.Logs[0]), "Luồng WARNING thiếu, thừa hoặc sai thứ tự thông báo.");
 
         legacy.SetSmokeLevel(700);
         string criticalOutput = CaptureOutput(() => monitor.CheckSensor("Phòng máy A", sensor));
-        Check(criticalOutput.Contains("[DASHBOARD]") && criticalOutput.Contains("[EMAIL SIMULATION]"), "Thiếu bên nhận cảnh báo CRITICAL.");
-        Check(criticalOutput.Contains("[CRITICAL]") && criticalOutput.EndsWith(GetEmergencyOutput()), "CRITICAL chưa kích hoạt đúng các thiết bị ứng phó.");
         Check(audit.Logs.Count == 2, "CRITICAL chưa được ghi nhật ký.");
+        string expected = GetAlertOutput(70, "CRITICAL", audit.Logs[1]) + GetEmergencyOutput();
+        Check(criticalOutput == expected, "Luồng CRITICAL thiếu, thừa hoặc sai thứ tự thông báo và thao tác ứng phó.");
     }
 
     private static void TestInvalidInputs()
@@ -316,6 +321,28 @@ public static class PatternTests
 
         foreach (IAlertObserver observer in observers)
             ExpectArgumentException<ArgumentNullException>(() => observer.Update(null!), "alertEvent");
+    }
+
+    private static void TestSensorAbstraction()
+    {
+        SensorMonitor monitor = new SensorMonitor();
+        List<AlertEvent> alerts = new();
+        monitor.Attach(new CallbackObserver(alerts.Add));
+
+        // Cảm biến giả không kế thừa Adapter và không sử dụng lớp cảm biến cũ
+        ISensor sensor = new StubSensor(65, "% test smoke");
+        monitor.CheckSensor("Cảm biến kiểm thử", sensor);
+
+        Check(alerts.Count == 1, "Monitor không nhận được dữ liệu từ một ISensor khác.");
+        AlertEvent alert = alerts[0];
+        Check(alert.SensorName == "Cảm biến kiểm thử" && alert.Value == 65, "Monitor đọc sai tên hoặc giá trị cảm biến khác.");
+        Check(alert.Unit == "% test smoke" && alert.Severity == "WARNING", "Monitor không sử dụng đúng giao diện ISensor.");
+    }
+
+    private static string GetAlertOutput(double value, string severity, string auditLog)
+    {
+        string message = $"Phòng máy A: {value:F1}% smoke [{severity}]";
+        return string.Join(Environment.NewLine, $"[DASHBOARD] {message}", $"[EMAIL SIMULATION] {auditLog}", $"[AUDIT] {auditLog}") + Environment.NewLine;
     }
 
     private static string GetEmergencyOutput()
@@ -363,6 +390,28 @@ public static class PatternTests
     }
 
     // Các đối tượng hỗ trợ chỉ dùng trong kiểm thử, không thêm vào mã nghiệp vụ
+    private sealed class StubSensor : ISensor
+    {
+        private readonly double _value;
+        private readonly string _unit;
+
+        public StubSensor(double value, string unit)
+        {
+            _value = value;
+            _unit = unit;
+        }
+
+        public double ReadValue()
+        {
+            return _value;
+        }
+
+        public string GetUnit()
+        {
+            return _unit;
+        }
+    }
+
     private sealed class CallbackObserver : IAlertObserver
     {
         private readonly Action<AlertEvent> _callback;

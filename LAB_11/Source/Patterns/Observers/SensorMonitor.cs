@@ -58,7 +58,7 @@ public sealed class SensorMonitor
 
     private void Notify(AlertEvent alertEvent)
     {
-        // Duyệt bản sao để việc đăng ký hoặc hủy đăng ký không làm hỏng vòng lặp
+        // Duyệt bản sao, thay đổi đăng ký chỉ có hiệu lực từ lượt thông báo tiếp theo
         foreach (IAlertObserver observer in _observers.ToArray())
         {
             try
